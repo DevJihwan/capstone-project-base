@@ -65,10 +65,14 @@ import router from './router';
             axios.get(`/logins/validate/${this.id}/${this.password}`).then(function(response){
                 console.log("TEST");
                 console.log(response);
-                if (response.data)
+                if(response.data){
                     router.push('/main')
                     console.log(response);
-            }).catch(error => console.log(error));
+                }
+            }).catch(function (error) {
+                console.log(error)
+                alert("등록되지 않은 회원입니다.")
+            });
         }
     }
   }
