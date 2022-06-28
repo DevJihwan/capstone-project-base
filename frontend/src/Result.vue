@@ -27,6 +27,7 @@
         <b>청년희망 적금 가입이 완료되었어요!</b>
       </div>
       <div style="text-align: center; margin-bottom: 15px;">
+        <p>{{acctNo}} / {{acctStatus}} / {{balance}} / {{custNo}} / {{openDate}}</p>
         <v-btn :to="'/done'" color="#178c72">
           <b style="color: white;">청년희망적금 내역보기</b>
         </v-btn>
@@ -41,8 +42,27 @@
 </template>
 
 <script>
+ import axios from 'axios'
+
   export default {
     name:"Result",
-    data: () => ({}),
+    data: () => ({
+      acctNo: null,
+      acctStatus: null,
+      balance: null,
+      custNo: null,
+      openDate: null, 
+    }),
+    created() {
+      var me = this
+        axios.get("/accountopen/1").then(function (result){
+          var data = result.data[0];
+          me.acctNo = data.acctNo;
+          me.acctStatus = data.accountStatus;
+          me.balance = data.accountBalance;
+          me.custNo = data.custNo;
+          me.openDate = data.openDate;
+        })
+    }
   }
 </script>

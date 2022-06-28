@@ -75,15 +75,12 @@
             // preapply Command -> Data 해당 아이디값 조회될때까지 조회하는걸 루프 -> 다음페이지 
             var me = this
             axios.post(`/preapply`,{custNo: 11, regNo: 2312312}).then(function () {
-              this.timer = setInterval(function() {
-                axios.get(`/preapplies/{id}`).then(function(result) {
-                  if(result.data == "PASSED") {
-                        router.push('/result')
-                        clearInterval(this.timer);
-                        console.log(result);
-                  }
-                }) 
-              }, 1000)
+              console.log(result);
+              if(window.confirm("완료되었습니다.")==true){
+                router.push('/result')
+              }else{
+                return false;
+              }
             })
 
             // this.timer = setInterval(function() {
