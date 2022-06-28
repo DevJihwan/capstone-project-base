@@ -21,7 +21,7 @@
 
       </v-app-bar>
       <div style="margin:30px; margin-top: 50px;">
-        <v-card-title>____님<br>하나청년적금은요?
+        <v-card-title>김하나님<br>하나청년적금은요?
           <v-btn icon style="position: absolute; margin-left: 66%;"><v-icon>mdi-share-variant</v-icon></v-btn>
           <v-btn icon style="position: absolute; margin-left: 75%;"><v-icon>mdi-heart-outline</v-icon></v-btn>
         </v-card-title>
@@ -47,10 +47,10 @@
         <br>
       </div>
       <div style="margin: 50px;">
-        <b>단, 소득이<br>2021년 총급여 3600만원 또는 종합소득금이<br>2600만원 이하만 가능해요!<br>사전 신청 후 소득 확인해볼까요?</b>
+        <b>단, 소득이<br>2021년 총급여 3600만원 또는 종합소득금이<br>2600만원 이하만 가능해요!<br>소득검증 후 계좌신규까지 해볼까요??</b>
       </div>
       <div style="text-align: center; margin-bottom: 15px;">
-        <v-btn color="#178c72" :to="'/result'"><b style="color: white;">신청하러가기</b></v-btn>
+        <v-btn @click="submit()" color="#178c72" :to="'/result'"><b style="color: white;">신청하기</b></v-btn>
       </div>
     </v-card>
 
@@ -62,8 +62,31 @@
 </template>
 
 <script>
+  import axios from 'axios'
+  import router from './router';
+
   export default {
     name:"Sub",
-    data: () => ({}),
+    data: () => ({
+        timer: null,
+    }),
+    methods: {
+        submit() {
+            //console.log(this.id + this.password)
+            this.timer = setTimeout(function(){
+                axios.post(`/preapply`,{custNo: 11, regNo: 2312312}).then(function(response){
+                    console.log(response.data);
+                    if (response.data)
+                        router.push('/sub')
+                        clearTimeout(this.timer);
+                        console.log(response);
+                }).catch(function (error) {
+                  console.log(error)
+                  alert("error")
+              });
+            }, 1000);
+
+        }
+    }
   }
 </script>

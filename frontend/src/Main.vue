@@ -84,7 +84,12 @@
     </div>
 </template>
 <script>
+
   export default {
     name: 'Main',
+    data: () => ({
+    }),
+    methods: {
+    }
   }
 </script>

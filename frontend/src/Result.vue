@@ -21,14 +21,14 @@
 
       </v-app-bar>
       <div style="margin:30px; margin-top: 70px;">
-        <v-card-title>____님은<br>작년 소득금액이 ____ 입니다.</v-card-title>
+        <v-card-title>김하나님은<br>작년 소득금액이 60,000,000원 입니다.</v-card-title>
       </div>
       <div style="margin: 50px; ">
-        <b>청년희망적금에 가입할 수 있어요!<br>가입하러 가볼까요?</b>
+        <b>청년희망 적금 가입이 완료되었어요!</b>
       </div>
       <div style="text-align: center; margin-bottom: 15px;">
         <v-btn :to="'/done'" color="#178c72">
-          <b style="color: white;">청년희망적금 가입하기</b>
+          <b style="color: white;">청년희망적금 내역보기</b>
         </v-btn>
       </div>
     </v-card>
