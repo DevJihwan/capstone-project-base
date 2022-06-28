@@ -50,7 +50,7 @@
         <b>단, 소득이<br>2021년 총급여 3600만원 또는 종합소득금이<br>2600만원 이하만 가능해요!<br>소득검증 후 계좌신규까지 해볼까요??</b>
       </div>
       <div style="text-align: center; margin-bottom: 15px;">
-        <v-btn @click="submit()" color="#178c72" :to="'/result'"><b style="color: white;">신청하기</b></v-btn>
+        <v-btn @click="submit()" color="#178c72"><b style="color: white;">신청하기</b></v-btn>
       </div>
     </v-card>
 
@@ -72,19 +72,30 @@
     }),
     methods: {
         submit() {
-            //console.log(this.id + this.password)
-            this.timer = setTimeout(function(){
-                axios.post(`/preapply`,{custNo: 11, regNo: 2312312}).then(function(response){
-                    console.log(response.data);
-                    if (response.data)
-                        router.push('/sub')
-                        clearTimeout(this.timer);
-                        console.log(response);
-                }).catch(function (error) {
-                  console.log(error)
-                  alert("error")
-              });
-            }, 1000);
+            // preapply Command -> Data 해당 아이디값 조회될때까지 조회하는걸 루프 -> 다음페이지 
+            var me = this
+            axios.post(`/preapply`,{custNo: 11, regNo: 2312312}).then(function () {
+              this.timer = setInterval(function() {
+                axios.get(`/preapplies/{id}`).then(function(result) {
+                  if(result.data == "PASSED") {
+                        router.push('/result')
+                        clearInterval(this.timer);
+                        console.log(result);
+                  }
+                }) 
+              }, 1000)
+            })
+
+            // this.timer = setInterval(function() {
+            //     axios.post(`/preapply`,{custNo: 11, regNo: 2312312}).then(function(response){
+            //         console.log(response.data);
+            //         if (response.data)
+                        
+            //     }).catch(function (error) {
+            //       console.log(error)
+            //       alert("error")
+            //   });
+            // }, 1000);
 
         }
     }
